@@ -1,0 +1,16 @@
+version: '3'
+# To create redis-container doesnt require Dockerfile, just directly docker-compose specification like below
+services:
+  redis:
+    image: redis/redis-stack:latest
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - DISABLE_COMMANDS=FLUSHDB,FLUSHALL,CONFIG
+      - REDIS_REPLICATION_MODE=master
+    ports:
+      - 6379:6379
+      - 8001:8001
+    volumes:
+      - local-data:/data
+volumes:
+  local-data:
